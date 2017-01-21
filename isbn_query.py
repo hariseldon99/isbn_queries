@@ -3,13 +3,11 @@ from __future__ import division, print_function
 import sys, urllib2, json, csv
 import argparse
 from tabulate import tabulate
-#Enter your API key below:
-APIKEY = 'XXXXXX'
 desc = """
        Downloads the minimum prices from an input of book ISBN
        numbers.
        Usage:
-       ./isbn_query.py -i ISBN_FILE -o OUTPUT_CSV
+       ./isbn_query.py -k APIKEY -i ISBN_FILE -o OUTPUT_CSV
        """
 #Try to import progressbars if available
 try:
@@ -32,6 +30,8 @@ isbndb_widgets = ['Downloading price data: ',\
 
 def input():
     parser = argparse.ArgumentParser(description=desc)
+    parser.add_argument('-k', '--apikey',\
+      help="API key from isbndb.com. Enter within quotes like 'XXXXX'")
     parser.add_argument('-i', '--input',\
       help="input file containing isbn numbers in a column")
     parser.add_argument('-o', '--output',\
@@ -65,7 +65,7 @@ if __name__ == '__main__':
         print(isbndb_widgets)   
     minprices = []
     for isbn in isbnlist:
-        minp = get_min_price(isbn, APIKEY)
+        minp = get_min_price(isbn, args_in.apikey)
         if pbar_avail:
             bar.update(bar_pos)
             bar_pos += 1
