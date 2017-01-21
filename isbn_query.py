@@ -3,6 +3,8 @@ from __future__ import division, print_function
 import sys, urllib2, json, csv
 import argparse
 from tabulate import tabulate
+#Enter your API key below:
+APIKEY = 'XXXXXX'
 desc = """
        Downloads the minimum prices from an input of book ISBN
        numbers.
@@ -23,7 +25,7 @@ try:
 except ImportError:
     pass    
 
-APIKEY = 'I2NLF8FQ'
+
 isbndb_json_url = 'http://isbndb.com/api/v2/json'
 isbndb_widgets = ['Downloading price data: ',\
       Percentage(), ' ', Bar(), ' ', ETA()]
